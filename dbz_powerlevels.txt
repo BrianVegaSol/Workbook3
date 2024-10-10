@@ -1,0 +1,7 @@
+Goku: 9000
+Vegeta: 8500
+Piccolo: 7000
+Gohan: 6000
+Frieza: 12000
+Cell: 15000
+Majin Buu: 20000
