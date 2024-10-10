@@ -1,8 +1,6 @@
 package com.pluarlsight;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.Scanner;
 
 public class PayrollCalculator {
@@ -52,7 +50,7 @@ public class PayrollCalculator {
         return payRate;
     }
 
-    //static Scanner scan = new Scanner(System.in);
+    static Scanner scan = new Scanner(System.in);
     static int employeeCount = 0;
 
     public static void main(String[] args) {
@@ -112,8 +110,11 @@ public class PayrollCalculator {
                 //System.out.println(id);
                // System.out.println(employee1);
                // System.out.println(employee1.calcGrossPay());
+
+                //Wont let the writer work
+                //reader.close();
             }
-            //null when outside of while loop (idk why)
+            //null when outside of while loop (IDK why)
             /*String [] pipeSplit = line.split("\\|");
             String id = pipeSplit[0];*/
 
@@ -124,23 +125,71 @@ public class PayrollCalculator {
             //System.out.println(employee1.calcGrossPay());
 
 
-
-
-
-
-
         } catch (IOException e) {
             System.err.println("Error occurred" + e.getMessage());
         } //A throw New RuntimeException(e); may work
 
+        //Part 2
+        //Guessing this is for Part 1???
+        /*System.out.println("Enter the name of the file employee file to process:\n Ex: employees.csv");
+        fileName = scan.nextLine();*/
+
+        System.out.println("Enter the name of the payroll file to create:\n Ex: payroll-sept-2023.csv");
+        fileName = scan.nextLine();
+
+        try (FileWriter writer = new FileWriter(fileName)) {
+            System.out.println("Enter the info in the following format: id|name|gross");
+            writer.write(scan.nextLine());
+            // open the file
+            //FileWriter writer = new FileWriter(scan.nextLine());
+
+
+            // write to the file
+            //writer.write(scan.nextLine());
+
+            //writer.write("Skills:\n");
+            //writer.write("Git, HTML, CSS, Bootstrap\n");
+            //writer.write("JavaScript/ES6, jQuery, REST API, Node.js, Express\n");
+            //writer.write("Angular\n");
+            //writer.write("Java");
+            // close the file when you are finished using it
+            //writer.close();
+        }
+
+        /*id|name|hours-worked|pay-rate
+10|Dana Wyatt|52.5|12.50
+20|Ezra Aiden|17|16.75
+30|Brittany Thibbs|40|16.50
+40|Zephaniah Hughes|2|10.0
+50|Caylee Callahan|35|15.50
+60|Zane Stephens|45|13.50
+70|Maverick Cummings|25.5|16.50
+80|Kamari Todd|32|14.50*/
+        catch (IOException e) {
+            System.out.println("ERROR:  An unexpected error occurred");
+            e.printStackTrace();
+        }
 
 
 
-
-
-
-
-
+        //File Buffer ex
+        /*try {
+            // create a FileWriter
+            FileWriter fileWriter = new FileWriter("employees.csv");
+            // create a BufferedWriter
+            BufferedWriter bufWriter = new BufferedWriter(fileWriter);
+            // write to the file
+            String text;
+            for(int i = 1; i <= 10; i++) {
+                text = String.format("Counting %d\n", i);
+                bufWriter.write(text);       }
+            // close the writer
+            bufWriter.close();
+        }
+        catch (IOException e) {
+            System.out.println("ERROR:  An unexpected error occurred");
+            e.getStackTrace();
+        }*/
 
     }
     public double calcGrossPay() {
