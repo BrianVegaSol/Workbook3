@@ -53,6 +53,7 @@ public class PayrollCalculator {
     }
 
     //static Scanner scan = new Scanner(System.in);
+    static int employeeCount = 0;
 
     public static void main(String[] args) {
         String fileName = "src/employees.csv";
@@ -68,12 +69,13 @@ public class PayrollCalculator {
 
 
             while ((line = reader.readLine()) != null) {
+                //continue past header to not run into parseNum issue
                 if (isFirstLine) {
                     isFirstLine = false; // Skip the header
                     continue;
                 }
-
-                System.out.println(line);
+                //Prints out raw data
+                //System.out.println(line);
                 pipeSplit = line.split("\\|");
 
                 int employeeID = Integer.parseInt(pipeSplit[0]);
@@ -82,6 +84,8 @@ public class PayrollCalculator {
                 double payRate = Double.parseDouble(pipeSplit[3]);
 
                 PayrollCalculator employee = new PayrollCalculator(employeeID,name,hourWorked,payRate);
+                //Method for pretty printing info
+                employee.printEmployeeInfo(employee);
 
                 /*System.out.println(employeeID);
                 System.out.println(name);
@@ -127,7 +131,7 @@ public class PayrollCalculator {
 
         } catch (IOException e) {
             System.err.println("Error occurred" + e.getMessage());
-        }
+        } //A throw New RuntimeException(e); may work
 
 
 
@@ -142,11 +146,23 @@ public class PayrollCalculator {
     public double calcGrossPay() {
         return getHoursWorked() * getPayRate();
     }
-    //Unnecessary???
+    //Unnecessary since set from constructor parameters
     public void setEmployees (PayrollCalculator employee){
         employee.setEmployeeID(employeeID);
         employee.setName(name);
         employee.setHoursWorked(hoursWorked);
         employee.setPayRate(payRate);
+    }
+    public void printEmployeeInfo(PayrollCalculator employee){
+        employeeCount ++;
+        //setEmployees(employee);
+        System.out.printf("Employee %d%n",employeeCount);
+        System.out.printf("Employee ID: %d%n", getEmployeeID());
+        System.out.println("Employee Name: " + getName());
+        System.out.printf("Hours Worked: %.1f%n", getHoursWorked());
+        System.out.printf("Pay Rate: $%.2f%n", getPayRate());
+        System.out.printf("Gross Pay: $%.2f%n",employee.calcGrossPay());
+        System.out.println("-------------------------");
+
     }
 }
