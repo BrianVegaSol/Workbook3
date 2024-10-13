@@ -134,43 +134,32 @@ public class PayrollCalculator {
         /*System.out.println("Enter the name of the file employee file to process:\n Ex: employees.csv");
         fileName = scan.nextLine();*/
 
-        System.out.println("Enter the name of the payroll file to create:\n Ex: payroll-sept-2023.csv");
+        //Need to append instead of write and use a buffer writer instead of writer to add ALL text
+
+        System.out.println("Enter the name of the payroll file to create/write in:\n Ex: payroll-sept-2023.csv");
         fileName = scan.nextLine();
 
-        try (FileWriter writer = new FileWriter(fileName)) {
+        try (FileWriter writer = new FileWriter(fileName, true)) {
             System.out.println("Enter the info in the following format: id|name|gross");
             writer.write(scan.nextLine());
-            // open the file
-            //FileWriter writer = new FileWriter(scan.nextLine());
 
-
-            // write to the file
-            //writer.write(scan.nextLine());
-
-            //writer.write("Skills:\n");
-            //writer.write("Git, HTML, CSS, Bootstrap\n");
-            //writer.write("JavaScript/ES6, jQuery, REST API, Node.js, Express\n");
-            //writer.write("Angular\n");
-            //writer.write("Java");
             // close the file when you are finished using it
             //writer.close();
-        }
-
-        /*id|name|hours-worked|pay-rate
-10|Dana Wyatt|52.5|12.50
-20|Ezra Aiden|17|16.75
-30|Brittany Thibbs|40|16.50
-40|Zephaniah Hughes|2|10.0
-50|Caylee Callahan|35|15.50
-60|Zane Stephens|45|13.50
-70|Maverick Cummings|25.5|16.50
-80|Kamari Todd|32|14.50*/
-        catch (IOException e) {
+        } catch (IOException e) {
             System.out.println("ERROR:  An unexpected error occurred");
             e.printStackTrace();
         }
 
+        /* BONUS:  If the user chooses specifies a .json extension write the data as JSON instead of csv.
+        For example:
 
+        Enter the name of the file employee file to process: employees.csv
+        Enter the name of the payroll file to create: payroll-sept-2023.json
+        payroll-sept-2023.json
+                [
+                { "id": 111, "name" : "Cameron Tay", "grossPay" : 3277.65 },   { "id": 222, "name" : "James Tee", "grossPay" : 2150.00 } ]
+
+*/
 
         //File Buffer ex
         /*try {
