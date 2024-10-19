@@ -26,7 +26,6 @@ public class SearchEngineLogger {
         writeToLog(launch);
         do {
             System.out.println("Welcome!\nWhat would you like to do?\n1) Search\n0) Exit");
-            try {
             int input = scan.nextByte();
                 switch (input) {
                     //Exit app
@@ -47,11 +46,8 @@ public class SearchEngineLogger {
                         }
                             exitApp();
                             exitApp = true;
+                        }
                         break;
-                }
-            } catch (InputMismatchException e) {
-                System.err.println("Invalid input");
-            }
         } while (!exitApp);
         scan.close();
 
