@@ -33,15 +33,11 @@ public class SearchInventory {
         String s1 = "4567|10' 2x4  (grade B)|9.99";
         String s2 = "1234|Hammer|19.49";
         String s3 = "2345|Box of nails|9.29";
+        System.out.println(names);
         menu();
-
-
         /*try(FileReader reader = new FileReader("inventory.csv")) {
             int line = reader.read();
             while (line != -1) {*/
-
-
-
     }
 
     public static void getInventory(Product p) {
@@ -77,9 +73,18 @@ public class SearchInventory {
                     searchID();
                     break;
                 case 3:
-                    Collections.sort(names, (c1,c2) -> Integer.compare(c1.getId(), c2.getId()));
-                    for (Product name : names) {
-
+                    Collections.sort(names, (c1,c2) -> Float.compare(c1.getPrice(), c2.getPrice()));
+                    /*for (Product name : names) {
+                        getInventory(name);
+                    }*/
+                    System.out.println("What is the beginning Price Range?");
+                    int startPrice = scan.nextInt();
+                    System.out.println("What is the beginning Price Range?");
+                    int endPrice = scan.nextInt();
+                        if (startPrice >= names.getFirst().getPrice() || endPrice <= names.getLast().getPrice()) {
+                    for (int i = 0; i < names.size(); i++) {
+                            System.out.println(names.get(i));
+                        }
                     }
 
                     break;
@@ -90,11 +95,11 @@ public class SearchInventory {
             }
         }
     }
-    public static void searchPriceRange() {
+    /*public static void searchPriceRange() {
         for (int i = startRange; i < endRange; i++) {
             print
         }
-    }
+    }*/
 
     public static void searchID() {
         System.out.print("Enter the ID: ");
