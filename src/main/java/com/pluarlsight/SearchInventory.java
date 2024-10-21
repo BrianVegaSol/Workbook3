@@ -77,6 +77,10 @@ public class SearchInventory {
                     searchID();
                     break;
                 case 3:
+                    Collections.sort(names, (c1,c2) -> Integer.compare(c1.getId(), c2.getId()));
+                    for (Product name : names) {
+
+                    }
 
                     break;
                 case 4:
@@ -84,6 +88,11 @@ public class SearchInventory {
                     break;
 
             }
+        }
+    }
+    public static void searchPriceRange() {
+        for (int i = startRange; i < endRange; i++) {
+            print
         }
     }
 
@@ -102,7 +111,7 @@ public class SearchInventory {
         String newProduct = scanner.nextLine();
         String file = "inventory.csv";
         try (FileWriter writer = new FileWriter(file, true)) {
-            writer.write(newProduct);
+            writer.write(newProduct + "\n");
         } catch (IOException e) {
             e.printStackTrace();
         }
