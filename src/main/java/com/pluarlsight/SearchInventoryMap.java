@@ -1,13 +1,16 @@
 package com.pluarlsight;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Scanner;
+import java.lang.reflect.Constructor;
+import java.util.*;
 
 public class SearchInventoryMap {
     static Scanner scan = new Scanner(System.in);
     static boolean runMenu = true;
+    static HashMap <Integer, Product>  product;
 
     public static void main(String[] args) {
         //HashMap fast loopup since computer decides the fastest way to store items
@@ -27,6 +30,7 @@ public class SearchInventoryMap {
             }  else {
                System.out.println("OK is not in the states map");
             };*/
+        reader();
         menu();
 
     }
@@ -62,7 +66,18 @@ public class SearchInventoryMap {
         }
     }
     public static void allProducts () {
-
+        for (int id : product.keySet()) {
+            System.out.println(product.toString());
+       /* }
+        for (int i = 0; i < product.size(); i++) {
+            int j = 1;
+            //if (Integer.parseInt(String.valueOf(product.get(i))) <=  Integer.parseInt(String.valueOf(product.get(j)))) {
+           // if (product.containsKey(i) < product.keySet(). {
+            Integer.compare(product.k,product.get(j))
+            System.out.println(product.keySet());
+            }
+            j++;*/
+        }
     }
     public static void searchByID () {
 
@@ -82,6 +97,25 @@ public class SearchInventoryMap {
             System.err.println("Error occurred" + e.getMessage());
         }
     }
-
+    public static void reader () {
+        String file = "inventory.csv";
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] split = line.split("\\|");
+                int id = Integer.parseInt(split[0]);
+                String name = split[1];
+                float price = Float.parseFloat(split[2]);
+                Product pRead = new Product(name, price);
+                product = new HashMap<>();
+                product.put(id, pRead);
+            }
+            /*for (Product name : names) {
+                getInventory(name);
+            }*/
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 }
