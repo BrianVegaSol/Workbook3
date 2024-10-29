@@ -13,7 +13,7 @@ public class SearchInventoryMap {
     static HashMap <Integer, Product>  product;
 
     public static String toStringy(Product prod) {
-        return "ID: " + product.get(prod.getId()) + "\n" +
+        return "ID: " + prod.getId() + "\n" +
                 "Name: " + prod.getName() + "\n" +
                 "Price: $" + prod.getPrice() + "\n" +
                 "-----------------------------";
