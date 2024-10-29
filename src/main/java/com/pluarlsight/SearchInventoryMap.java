@@ -65,18 +65,22 @@ public class SearchInventoryMap {
 
         }
     }
+
+
     public static void allProducts () {
+
         for (int id : product.keySet()) {
             System.out.println(product.toString());
-       /* }
+        }
         for (int i = 0; i < product.size(); i++) {
             int j = 1;
-            //if (Integer.parseInt(String.valueOf(product.get(i))) <=  Integer.parseInt(String.valueOf(product.get(j)))) {
-           // if (product.containsKey(i) < product.keySet(). {
-            Integer.compare(product.k,product.get(j))
+        Map.Entry.comparingByKey();
+            if (Integer.parseInt(String.valueOf(product.get(i))) <=  Integer.parseInt(String.valueOf(product.get(j)))) {
+           //if (product.containsKey(i) < product.keySet(). {
+            //Integer.compare(product.get(i),product.get(j));
             System.out.println(product.keySet());
             }
-            j++;*/
+            j++;
         }
     }
     public static void searchByID () {
@@ -109,6 +113,7 @@ public class SearchInventoryMap {
                 Product pRead = new Product(name, price);
                 product = new HashMap<>();
                 product.put(id, pRead);
+                System.out.println(product);
             }
             /*for (Product name : names) {
                 getInventory(name);
