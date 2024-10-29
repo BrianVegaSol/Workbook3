@@ -11,6 +11,16 @@ public class Product {
         this.price = price;
     }
 
+    public Product(String name, float price) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public int getId() {
         return this.id;
     }

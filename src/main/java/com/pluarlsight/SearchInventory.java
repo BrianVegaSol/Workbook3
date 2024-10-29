@@ -5,6 +5,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.Constructor;
 import java.text.Format;
 import java.util.*;
 import java.util.List;
@@ -73,6 +74,7 @@ public class SearchInventory {
                     searchID();
                     break;
                 case 3:
+                    reader();
                     Collections.sort(names, (c1,c2) -> Float.compare(c1.getPrice(), c2.getPrice()));
                     /*for (Product name : names) {
                         getInventory(name);
@@ -81,9 +83,9 @@ public class SearchInventory {
                     int startPrice = scan.nextInt();
                     System.out.println("What is the beginning Price Range?");
                     int endPrice = scan.nextInt();
-                        if (startPrice >= names.getFirst().getPrice() || endPrice <= names.getLast().getPrice()) {
+                        if (startPrice >= names.getFirst().getPrice() && endPrice <= names.getLast().getPrice()) {
                     for (int i = 0; i < names.size(); i++) {
-                            System.out.println(names.get(i));
+                            System.out.println(names.get(i).toString());
                         }
                     }
 
@@ -140,6 +142,13 @@ public class SearchInventory {
             e.printStackTrace();
         }
     }
+    public static void sortID(ArrayList<Product> product) {
+        product.sort(Comparator.comparing(Product::getId));//.thenComparing(Product::getAmount)
+    }
+    public static void sortPrice(ArrayList<Product> product) {
+        product.sort(Comparator.comparing(Product::getPrice));
+    }
+
    /*public static  ArrayList<Product> getInventory () {
         return ;
    }*/
