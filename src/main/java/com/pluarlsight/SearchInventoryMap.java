@@ -12,6 +12,13 @@ public class SearchInventoryMap {
     static boolean runMenu = true;
     static HashMap <Integer, Product>  product;
 
+    public static String toStringy(Product prod) {
+        return "ID: " + product.get(prod.getId()) + "\n" +
+                "Name: " + prod.getName() + "\n" +
+                "Price: $" + prod.getPrice() + "\n" +
+                "-----------------------------";
+    }
+
     public static void main(String[] args) {
         //HashMap fast loopup since computer decides the fastest way to store items
         //.put(key, value);
@@ -106,14 +113,17 @@ public class SearchInventoryMap {
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String line;
             while ((line = reader.readLine()) != null) {
+                int tempCount = 0;
                 String[] split = line.split("\\|");
                 int id = Integer.parseInt(split[0]);
                 String name = split[1];
                 float price = Float.parseFloat(split[2]);
                 Product pRead = new Product(name, price);
+                pRead.setId(id);
                 product = new HashMap<>();
                 product.put(id, pRead);
-                System.out.println(product);
+                System.out.println("Key: " + product.get(tempCount));
+                System.out.println(toStringy(pRead));
             }
             /*for (Product name : names) {
                 getInventory(name);

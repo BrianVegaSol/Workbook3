@@ -32,6 +32,7 @@ public class Product {
     public float getPrice() {
         return this.price;
     }
+
     @Override
     public String toString () {
         return "ID: " + getId() + "\n" +
@@ -39,4 +40,5 @@ public class Product {
                 "Price: $" + getPrice() + "\n" +
                 "-----------------------------";
     }
+
 }
