@@ -73,24 +73,29 @@ public class SearchInventoryMap {
         }
     }
 
-
+    //Sorts from newest to oldest
     public static void allProducts () {
-
+        /*for (int i = 0; i <= product.size(); i++) {
+        }*/
+            System.out.println(Product.mapString(product));
+    }
+    public static void searchByID () {
         for (int id : product.keySet()) {
-            System.out.println(product.toString());
+
+            //product.sort(Map.Entry.comparingByKey());
+
+            System.out.println(toStringy(product.get(0)));
         }
         for (int i = 0; i < product.size(); i++) {
             int j = 1;
         Map.Entry.comparingByKey();
-            if (Integer.parseInt(String.valueOf(product.get(i))) <=  Integer.parseInt(String.valueOf(product.get(j)))) {
+            //if (Integer.parseInt(String.valueOf(product.get(i))) <=  Integer.parseInt(String.valueOf(product.get(j)))) {
            //if (product.containsKey(i) < product.keySet(). {
             //Integer.compare(product.get(i),product.get(j));
             System.out.println(product.keySet());
-            }
-            j++;
+           // }
+            //j++;
         }
-    }
-    public static void searchByID () {
 
     }
     public static void searchByPrice () {
@@ -110,19 +115,18 @@ public class SearchInventoryMap {
     }
     public static void reader () {
         String file = "inventory.csv";
+        product = new HashMap<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                int tempCount = 0;
                 String[] split = line.split("\\|");
                 int id = Integer.parseInt(split[0]);
                 String name = split[1];
                 float price = Float.parseFloat(split[2]);
                 Product pRead = new Product(name, price);
                 pRead.setId(id);
-                product = new HashMap<>();
+
                 product.put(id, pRead);
-                System.out.println("Key: " + product.get(tempCount));
                 System.out.println(toStringy(pRead));
             }
             /*for (Product name : names) {
