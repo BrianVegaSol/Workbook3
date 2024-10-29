@@ -1,9 +1,14 @@
 package com.pluarlsight;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Product {
     private int id;
     private String name;
     private float price;
+
+    public Product() {}
 
     public Product(int id, String name, float price) {
         this.id = id;
@@ -39,6 +44,23 @@ public class Product {
                 "Name: " + getName() + "\n" +
                 "Price: $" + getPrice() + "\n" +
                 "-----------------------------";
+    }
+
+    public static String mapString(HashMap<Integer, Product> map){
+        StringBuilder sb = new StringBuilder();
+
+        for (Map.Entry<Integer, Product> entry : map.entrySet()) {
+            sb.append("ID: ").append(entry.getKey())
+                    .append("\nName: ").append(entry.getValue().getName())
+            .append(String.format("\nPrice: $%.2f", (entry.getValue().getPrice())))
+            .append("\n-----------------------------\n");
+        }
+
+        /*sb.append("ID: ").append(map.get().getId());
+        sb.append("\nName: ").append(map.get().getName());
+        sb.append("\nPrice: ").append(map.get().getPrice());
+        sb.append("-----------------------------");*/
+        return sb.toString();
     }
 
 }
