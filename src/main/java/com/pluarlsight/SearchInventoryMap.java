@@ -120,10 +120,26 @@ public class SearchInventoryMap {
 
     public static void addProduct () {
         String file = "inventory.csv";
-        System.out.println("Enter the new product as follows:\n" +
-                "ID|Description|Price");
-        scan.nextLine();
-        String input = scan.nextLine();
+        String input = "";
+        boolean validInput = false;
+            while (!validInput) {
+                int id = -1;
+                try {
+                    System.out.println("Enter the new product as follows:\n" +
+                            "ID|Description|Price");
+                    scan.nextLine();
+                    input = scan.nextLine();
+                    String[] split = input.split("\\|");
+                    id = Integer.parseInt(split[0]);
+                    //if (product.putIfAbsent(id,values) != null)
+                    if (product.get(id).getId() == id) {
+                        throw new IllegalArgumentException("Unable to add new product, duplicate id for: " + id);
+                    }
+                } catch (IllegalArgumentException e) {
+                    System.err.println("Unable to add new product, duplicate id for: " + id);
+                }
+                validInput = true;
+            }
         try(FileWriter write = new FileWriter(file, true)){
             write.write(input.trim() + "\n");
         } catch (IOException e) {
