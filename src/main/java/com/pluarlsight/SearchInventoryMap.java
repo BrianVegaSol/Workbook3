@@ -75,9 +75,24 @@ public class SearchInventoryMap {
 
     //Sorts from newest to oldest
     public static void allProducts () {
+        product.forEach((k, v) -> {
+            System.out.print(Product.mapString(k ,v.getName(),v.getPrice()));
+        });
+        //Print w/o order
+        /*var printMap = product.entrySet();
+        for (var entry : printMap) {
+            System.out.println(entry);*/
+
+        //Proving this can be done :')
+        /*product.forEach((k, v) -> {
+            System.out.println("ID: " + k +
+                    String.format("\nName: %s%nPrice: $%.2f",v.getName(),v.getPrice()));
+        });*/
+
+
         /*for (int i = 0; i <= product.size(); i++) {
         }*/
-            System.out.println(Product.mapString(product));
+            //System.out.println(Product.mapString(product)); Old Code
     }
     public static void searchByID () {
         for (int id : product.keySet()) {
@@ -101,6 +116,8 @@ public class SearchInventoryMap {
     public static void searchByPrice () {
 
     }
+
+
     public static void addProduct () {
         String file = "inventory.csv";
         System.out.println("Enter the new product as follows:\n" +
@@ -127,7 +144,7 @@ public class SearchInventoryMap {
                 pRead.setId(id);
 
                 product.put(id, pRead);
-                System.out.println(toStringy(pRead));
+                //System.out.println(toStringy(pRead));
             }
             /*for (Product name : names) {
                 getInventory(name);

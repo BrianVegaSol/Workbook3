@@ -46,20 +46,23 @@ public class Product {
                 "-----------------------------";
     }
 
-    public static String mapString(HashMap<Integer, Product> map){
+    /*public static String mapString(HashMap<Integer, Product> map){
         StringBuilder sb = new StringBuilder();
-
         for (Map.Entry<Integer, Product> entry : map.entrySet()) {
             sb.append("ID: ").append(entry.getKey())
                     .append("\nName: ").append(entry.getValue().getName())
             .append(String.format("\nPrice: $%.2f", (entry.getValue().getPrice())))
             .append("\n-----------------------------\n");
         }
+        return sb.toString();
+    }*/
 
-        /*sb.append("ID: ").append(map.get().getId());
-        sb.append("\nName: ").append(map.get().getName());
-        sb.append("\nPrice: ").append(map.get().getPrice());
-        sb.append("-----------------------------");*/
+    public static String mapString(int id, String name, double price){
+        StringBuilder sb = new StringBuilder();
+            sb.append("ID: ").append(id)
+                    .append("\nName: ").append(name)
+                    .append(String.format("\nPrice: $%.2f", (price)))
+                    .append("\n-----------------------------\n");
         return sb.toString();
     }
 
