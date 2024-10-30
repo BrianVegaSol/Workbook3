@@ -10,7 +10,7 @@ import java.util.*;
 public class SearchInventoryMap {
     static Scanner scan = new Scanner(System.in);
     static boolean runMenu = true;
-    static HashMap <Integer, Product>  product;
+    static HashMap<Integer, Product> product;
 
     public static String toStringy(Product prod) {
         return "ID: " + prod.getId() + "\n" +
@@ -74,9 +74,9 @@ public class SearchInventoryMap {
     }
 
     //Sorts from newest to oldest
-    public static void allProducts () {
+    public static void allProducts() {
         product.forEach((k, v) -> {
-            System.out.print(Product.mapString(k ,v.getName(),v.getPrice()));
+            System.out.print(Product.mapString(k, v.getName(), v.getPrice()));
         });
         //Print w/o order
         /*var printMap = product.entrySet();
@@ -92,9 +92,10 @@ public class SearchInventoryMap {
 
         /*for (int i = 0; i <= product.size(); i++) {
         }*/
-            //System.out.println(Product.mapString(product)); Old Code
+        //System.out.println(Product.mapString(product)); Old Code
     }
-    public static void searchByID () {
+
+    public static void searchByID() {
         for (int id : product.keySet()) {
 
             //product.sort(Map.Entry.comparingByKey());
@@ -103,50 +104,51 @@ public class SearchInventoryMap {
         }
         for (int i = 0; i < product.size(); i++) {
             int j = 1;
-        Map.Entry.comparingByKey();
+            Map.Entry.comparingByKey();
             //if (Integer.parseInt(String.valueOf(product.get(i))) <=  Integer.parseInt(String.valueOf(product.get(j)))) {
-           //if (product.containsKey(i) < product.keySet(). {
+            //if (product.containsKey(i) < product.keySet(). {
             //Integer.compare(product.get(i),product.get(j));
             System.out.println(product.keySet());
-           // }
+            // }
             //j++;
         }
 
     }
-    public static void searchByPrice () {
+
+    public static void searchByPrice() {
 
     }
 
 
-    public static void addProduct () {
+    public static void addProduct() {
         String file = "inventory.csv";
         String input = "";
-        boolean validInput = false;
-            while (!validInput) {
-                int id = -1;
-                try {
-                    System.out.println("Enter the new product as follows:\n" +
-                            "ID|Description|Price");
-                    scan.nextLine();
-                    input = scan.nextLine();
-                    String[] split = input.split("\\|");
-                    id = Integer.parseInt(split[0]);
-                    //if (product.putIfAbsent(id,values) != null)
-                    if (product.get(id).getId() == id) {
-                        throw new IllegalArgumentException("Unable to add new product, duplicate id for: " + id);
-                    }
-                } catch (IllegalArgumentException e) {
-                    System.err.println("Unable to add new product, duplicate id for: " + id);
-                }
-                validInput = true;
+        int id = -1;
+        try {
+            System.out.println("Enter the new product as follows:\n" +
+                    "ID|Description|Price");
+            scan.nextLine();
+            input = scan.nextLine();
+            String[] split = input.split("\\|");
+            id = Integer.parseInt(split[0]);
+            //if (product.putIfAbsent(id,values) != null)
+            if (product.get(id).getId() == id) {
+                throw new IllegalArgumentException("Unable to add new product, duplicate id for: " + id);
             }
-        try(FileWriter write = new FileWriter(file, true)){
+        } catch (IllegalArgumentException e) {
+            System.err.println("Unable to add new product, duplicate id for: " + id);
+            return;
+        }
+
+
+        try (FileWriter write = new FileWriter(file, true)) {
             write.write(input.trim() + "\n");
         } catch (IOException e) {
             System.err.println("Error occurred" + e.getMessage());
         }
     }
-    public static void reader () {
+
+    public static void reader() {
         String file = "inventory.csv";
         product = new HashMap<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
