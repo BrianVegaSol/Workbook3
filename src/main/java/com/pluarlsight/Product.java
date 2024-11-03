@@ -8,7 +8,8 @@ public class Product {
     private String name;
     private float price;
 
-    public Product() {}
+    public Product() {
+    }
 
     public Product(int id, String name, float price) {
         this.id = id;
@@ -39,7 +40,7 @@ public class Product {
     }
 
     @Override
-    public String toString () {
+    public String toString() {
         return "ID: " + getId() + "\n" +
                 "Name: " + getName() + "\n" +
                 "Price: $" + getPrice() + "\n" +
@@ -57,12 +58,22 @@ public class Product {
         return sb.toString();
     }*/
 
-    public static String mapString(int id, String name, double price){
+    public static String mapStringByID(int id, String name, double price) {
+        //order:id, name, price;
         StringBuilder sb = new StringBuilder();
-            sb.append("ID: ").append(id)
-                    .append("\nName: ").append(name)
-                    .append(String.format("\nPrice: $%.2f", (price)))
-                    .append("\n-----------------------------\n");
+        sb.append("\nID: ").append(id)
+                .append("\nName: ").append(name)
+                .append(String.format("\nPrice: $%.2f", (price)))
+                .append("\n-----------------------------\n");
+        return sb.toString();
+    }
+
+    public static String mapStringByPrice(double price, int id, String name) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(String.format("\nPrice: $%.2f", (price)))
+                .append("\nID: ").append(id)
+                .append("\nName: ").append(name)
+                .append("\n-----------------------------\n");
         return sb.toString();
     }
 

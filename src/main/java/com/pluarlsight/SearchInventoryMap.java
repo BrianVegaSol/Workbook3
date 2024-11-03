@@ -64,7 +64,11 @@ public class SearchInventoryMap {
                     searchByID();
                     break;
                 case 3:
-                    searchByPrice();
+                    System.out.println("What is the Minimum Price Range?");
+                        double min = scan.nextDouble();
+                    System.out.println("What is the Maximum Price Range?");
+                        double max = scan.nextDouble();
+                    searchByPrice(min, max);
                     break;
                 case 4:
                     addProduct();
@@ -77,7 +81,7 @@ public class SearchInventoryMap {
     //Sorts from newest to oldest
     public static void allProducts() {
         product.forEach((key, value) -> {
-            System.out.print(Product.mapString(key, value.getName(), value.getPrice()));
+            System.out.print(Product.mapStringByID(key, value.getName(), value.getPrice()));
         });
         //Print w/o order
         /*var printMap = product.entrySet();
@@ -123,7 +127,7 @@ public class SearchInventoryMap {
                 //.sorted((key1, key2) -> key1.getKey().compareTo(key2.getKey()))
                 .sorted(Comparator.comparing(Map.Entry::getKey))
                 .forEach((entry) -> {
-            System.out.println(Product.mapString(entry.getKey(),
+            System.out.println(Product.mapStringByID(entry.getKey(),
                     entry.getValue().getName(), entry.getValue().getPrice()));
         });
 
@@ -132,8 +136,19 @@ public class SearchInventoryMap {
 
     }
 
-    public static void searchByPrice() {
-
+    public static void searchByPrice(double min, double max) {
+        product.entrySet().stream()
+                .filter(entry -> entry.getValue().getPrice() >= min &&
+                        entry.getValue().getPrice() <= max)
+                //EXPLAIN w/o Comparator
+                /*.sorted((price1, price2) -> Double.compare(price1.getValue().getPrice()
+                        ,(price2.getValue().getPrice())))*/
+                //EXPLAIN w/ Comparator
+                .sorted(Comparator.comparingDouble(price -> price.getValue().getPrice()))
+                .forEach((entry) -> {
+                    System.out.println(Product.mapStringByPrice(entry.getValue().getPrice(),
+                            entry.getKey(), entry.getValue().getName()));
+                });
     }
 
 
