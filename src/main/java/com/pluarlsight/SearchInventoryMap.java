@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.util.*;
+import java.util.function.Predicate;
 
 public class SearchInventoryMap {
     static Scanner scan = new Scanner(System.in);
@@ -75,8 +76,8 @@ public class SearchInventoryMap {
 
     //Sorts from newest to oldest
     public static void allProducts() {
-        product.forEach((k, v) -> {
-            System.out.print(Product.mapString(k, v.getName(), v.getPrice()));
+        product.forEach((key, value) -> {
+            System.out.print(Product.mapString(key, value.getName(), value.getPrice()));
         });
         //Print w/o order
         /*var printMap = product.entrySet();
@@ -96,22 +97,38 @@ public class SearchInventoryMap {
     }
 
     public static void searchByID() {
-        for (int id : product.keySet()) {
+        //for (int id : product.keySet()) {
 
             //product.sort(Map.Entry.comparingByKey());
 
-            System.out.println(toStringy(product.get(0)));
-        }
-        for (int i = 0; i < product.size(); i++) {
-            int j = 1;
+            //System.out.println(toStringy(product.get(0)));
+        //}
+        //EXPLAIN Old method
+       /* for (int i = 1; i < product.size(); i++) {
             Map.Entry.comparingByKey();
+            System.out.println(Product.mapString(product.get(i).getId(),
+                    product.get(i).getName(),
+                    product.get(i).getPrice()));
+        }*/
+        //EXPLAIN END
+            //int j = 1;
             //if (Integer.parseInt(String.valueOf(product.get(i))) <=  Integer.parseInt(String.valueOf(product.get(j)))) {
             //if (product.containsKey(i) < product.keySet(). {
             //Integer.compare(product.get(i),product.get(j));
-            System.out.println(product.keySet());
             // }
             //j++;
-        }
+        // EXPLAIN Revised for each using lambdas! :D
+        product.entrySet().stream()
+                //EXPLAIN without Comparator
+                //.sorted((key1, key2) -> key1.getKey().compareTo(key2.getKey()))
+                .sorted(Comparator.comparing(Map.Entry::getKey))
+                .forEach((entry) -> {
+            System.out.println(Product.mapString(entry.getKey(),
+                    entry.getValue().getName(), entry.getValue().getPrice()));
+        });
+
+               // .filter(integerProductEntry -> scan.hasNextBigInteger());
+        //comparingByKey(Comparator.comparing(Product::getId));
 
     }
 
@@ -124,6 +141,7 @@ public class SearchInventoryMap {
         String file = "inventory.csv";
         String input = "";
         int id = -1;
+        //Validation
         try {
             System.out.println("Enter the new product as follows:\n" +
                     "ID|Description|Price");
@@ -139,8 +157,7 @@ public class SearchInventoryMap {
             System.err.println("Unable to add new product, duplicate id for: " + id);
             return;
         }
-
-
+        //Writer
         try (FileWriter write = new FileWriter(file, true)) {
             write.write(input.trim() + "\n");
         } catch (IOException e) {
